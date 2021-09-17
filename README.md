@@ -4,7 +4,6 @@ We assume that you are using Windows 10, and the example IDE/Editor will be [Vis
 
 ## Git Setup
 
-------------
 Create GitHub repo & clone locally.
 
 1. If not already done, create a [GitHub](https://github.com/) account.
@@ -41,7 +40,6 @@ Create GitHub repo & clone locally.
 
 ## Python setup
 
----------------
 
 Install the latest python version (Python 3.9 at time of writing)
 
@@ -55,7 +53,6 @@ Install the latest python version (Python 3.9 at time of writing)
 
 ## IDE Setup
 
-------------
 
 Experienced users may have a preferred environment, but this tutorial will be working under the assumption of you using Visual Studio Code on Windows 10.
 
@@ -73,11 +70,7 @@ Experienced users may have a preferred environment, but this tutorial will be wo
 
 ### Virtual Environment
 
-
-
 ## Creating the Bot
-
-------------
 
 **Please type the code examples, do not copy and paste them.**
 
@@ -117,7 +110,6 @@ In Visual Studio Code, create a new file and name it `bot.py`.
 
 ## Adding Commands
 
-------------
 
 ### Ping
 
@@ -125,9 +117,10 @@ In Visual Studio Code, create a new file and name it `bot.py`.
 
 ### User Input
 
+------------------------------------
+
 ## Additional Resources
 
-------------
 
 * [Python Documentation](https://www.python.org/doc/)
     * [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
