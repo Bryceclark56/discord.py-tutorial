@@ -2,6 +2,16 @@
 
 We assume that you are using Windows 10, and the example IDE/Editor will be [Visual Studio Code](https://code.visualstudio.com/).
 
+The following programs are required for this tutorial:
+
+Program | Download Page
+--------|-------------
+Python 3.9 | https://www.python.org/downloads/
+Git | https://git-scm.com/downloads
+Visual Studio Code | https://code.visualstudio.com/Download
+
+
+
 ## Git Setup
 
 Create GitHub repo & clone locally.
@@ -62,13 +72,13 @@ Experienced users may have a preferred environment, but this tutorial will be wo
 
 ### GitLens
 
-### Opening the Project
+#### Opening the Project
 
 1. Click on "Open Folder" in the *Welcome* tab of Visual Studio Code.
 2. Navigate to where the cloned Git repository is located.
 3. Click on the folder and hit okay.
 
-### Virtual Environment
+#### Virtual Environment
 
 ## Creating the Bot
 
@@ -77,28 +87,40 @@ Experienced users may have a preferred environment, but this tutorial will be wo
 In Visual Studio Code, create a new file and name it `bot.py`.
 (INCLUDE IMAGE TO LOCATE NEW FILE BUTTON)
 
-### Creating the Bot Class
+#### Creating the Bot Class
 
 1. Begin your bot by creating a class for it:
 
     ``` Python
-    import discord
+    import discord # Import Discord.py
 
-    class MyBot(discord.Client):
+    class MyBot(discord.Client): # Define your bot's class
     ```
 
 2. Add methods for *on_ready* and *on_message* after the class definition:
 
     ``` Python
     class MyBot(discord.Client):
-        async def on_ready(self):
-            print('Connected to Discord as {0}'.format(self.user))
+        async def on_ready(self): # on_ready method signature
+            print('Connected to Discord as {0}'.format(self.user)) # on_ready method body
         
-        async def on_message(self, message):
-            print('New message from {0.author}: {0.content}'.format(message))
+        async def on_message(self, message): # on_message method signature
+            print('New message from {0.author}: {0.content}'.format(message)) # on_ready method body
     ```
+Your current `bot.py` file should look like:
 
-### Connecting to Discord
+``` Python
+import discord
+    
+class MyBot(discord.Client):
+    async def on_ready(self):
+        print('Connected to Discord as {0}'.format(self.user))
+        
+    async def on_message(self, message): # on_message method signature
+        print('New message from {0.author}: {0.content}'.format(message))
+```
+
+#### Connecting to Discord
 
 1. Register your bot with Discord
 
@@ -111,11 +133,11 @@ In Visual Studio Code, create a new file and name it `bot.py`.
 ## Adding Commands
 
 
-### Ping
+#### Ping
 
-### Help
+#### Help
 
-### User Input
+#### User Input
 
 ------------------------------------
 
