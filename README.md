@@ -5,12 +5,10 @@ We assume that you are using Windows 10, and the example IDE/Editor will be [Vis
 The following programs are required for this tutorial:
 
 Program | Download Page
---------|-------------
-Python 3.9 | https://www.python.org/downloads/
-Git | https://git-scm.com/downloads
-Visual Studio Code | https://code.visualstudio.com/Download
-
-
+--------|--------------
+Python 3.9 | <https://www.python.org/downloads/>
+Git | <https://git-scm.com/downloads>
+Visual Studio Code | <https://code.visualstudio.com/download>
 
 ## Git Setup
 
@@ -43,13 +41,12 @@ Create GitHub repo & clone locally.
     3. In PowerShell, enter:
 
         ``` PowerShell
-        git clone https://github.com/YourUsername/RepositoryName
+        git clone https://github.com/YourGitHubUsername/RepositoryName
         ```
 
         * Replace *YourUsername* and *RepositoryName* with the appropriate values
 
 ## Python setup
-
 
 Install the latest python version (Python 3.9 at time of writing)
 
@@ -59,12 +56,9 @@ Install the latest python version (Python 3.9 at time of writing)
     * Create in the git repo folder
 
 3. Install required packages inside the virtual environment
-    * Discord.<span></span>py
+    * discord<area>.py
 
 ## IDE Setup
-
-
-Experienced users may have a preferred environment, but this tutorial will be working under the assumption of you using Visual Studio Code on Windows 10.
 
 (IMAGES OF WHERE TO INSTALL EXTENSIONS)
 
@@ -72,79 +66,159 @@ Experienced users may have a preferred environment, but this tutorial will be wo
 
 ### GitLens
 
-#### Opening the Project
+### Opening the Project
 
-1. Click on "Open Folder" in the *Welcome* tab of Visual Studio Code.
+1. Click on "Open Folder" in the *Welcome* tab of Visual Studio Code. (The tabs are located at the top of the window)
+
 2. Navigate to where the cloned Git repository is located.
+
 3. Click on the folder and hit okay.
 
-#### Virtual Environment
+### Virtual Environment
 
 ## Creating the Bot
 
 **Please type the code examples, do not copy and paste them.**
 
+**Indentation in the code is important!**
+
 In Visual Studio Code, create a new file and name it `bot.py`.
 (INCLUDE IMAGE TO LOCATE NEW FILE BUTTON)
 
-#### Creating the Bot Class
+### Creating the Bot Class
 
-1. Begin your bot by creating a class for it:
+1. Import the `discord.py` library:
 
     ``` Python
-    import discord # Import Discord.py
-
-    class MyBot(discord.Client): # Define your bot's class
+    import discord # Import discord.py
     ```
 
-2. Add methods for *on_ready* and *on_message* after the class definition:
+2. Create the class for your bot and an *on_ready* method:
 
     ``` Python
     class MyBot(discord.Client):
         async def on_ready(self): # on_ready method signature
-            print('Connected to Discord as {0}'.format(self.user)) # on_ready method body
-        
-        async def on_message(self, message): # on_message method signature
-            print('New message from {0.author}: {0.content}'.format(message)) # on_ready method body
+            print(f'Connected to Discord as {self.user}') # on_ready method body
     ```
+
+3. Instantiate the bot
+
+    1. Import the `OS` module, allowing you to get environment variables.
+
+        ``` Python
+        import os # This should be at the top of the file, above or below the other import
+        ```
+
+    2. Create the bot variable, and pass in your *discord bot token* via an environment variable.
+
+        ``` Python
+        # This should be below everything else in the file
+        bot = MyBot(command_prefix='!')
+        bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
+        ```
+
 Your current `bot.py` file should look like:
 
 ``` Python
 import discord
-    
+import os
+
 class MyBot(discord.Client):
     async def on_ready(self):
-        print('Connected to Discord as {0}'.format(self.user))
-        
-    async def on_message(self, message): # on_message method signature
-        print('New message from {0.author}: {0.content}'.format(message))
+        print(f'Connected to Discord as {self.user}')
+
+
+bot = MyBot(command_prefix='!')
+bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
 ```
 
-#### Connecting to Discord
+### Connecting to Discord
 
 1. Register your bot with Discord
 
-    In-order to allow your bot to connect to Discord, you must create the bot user on the [Discord Developer Portal](https://discord.com/developers/)
+    In-order to allow your bot to connect to Discord, you must create the bot user on the [Discord Developer Portal](https://discord.com/developers/).
 
     1. Create a new application
     2. Enable bot
     3. Copy token
 
+2. Invite the bot to your server
+
+    1. Configure permissions
+    2. Copy the invite link
+    3. Paste in browser
+    4. Allow the bot to join
+
+3. Start the bot
+
+    Now run the python program, allowing the bot to connect to Discord.
+
+    ``` Powershell
+    python bot.py
+    ```
+
+    You should see it say something similar to `Connected to Discord as BotName#0123` in your terminal.
+
 ## Adding Commands
 
+Commands are the most basic way for users in your server to interact with your bot.
 
-#### Ping
+As you add each command, re-start your bot and test it out!
 
-#### Help
+**Important**: Ensure that the code is typed before `bot.run()` and *after* `bot = MyBot()`
 
-#### User Input
+### Ping
+
+A ping command is an easy way for users and yourself to ensure that your bot can read and reply to users' messages.
+
+``` Python
+@bot.command() # Links the function to your bot as the logic for the command
+async def ping(ctx): # The command name is defined by the function name
+    """Check the bot's responsiveness""" # Describes what the command
+
+    await ctx.reply('Pong!') # Send's the message as a reply (notifies them) to the user
+```
+
+You can test the command by sending `!ping` into any channel in the Discord server with your bot.
+
+And, if you feel lost, here is what you should have so far:
+
+``` Python
+import discord
+import os
+
+class MyBot(discord.Client):
+    async def on_ready(self):
+        print('Connected to Discord as {0}'.format(self.user))
+
+
+bot = MyBot(command_prefix='!')
+
+@bot.command()
+async def ping(ctx):
+    """Check the bot's responsiveness"""
+
+    await ctx.reply('Pong!')
+
+
+bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
+```
+
+### Compliment
+
+We're going to introduce user input into your bot's commands.
+
+This command will take in a user in your server and respond with a random compliment from a list.
+
+### User Info
+
+Now you're going to use an embed in your response!
 
 ------------------------------------
 
 ## Additional Resources
 
-
 * [Python Documentation](https://www.python.org/doc/)
-    * [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
+  * [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
 * [Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/)
 * [Discord API Documentation](https://discord.com/developers/docs/intro)
