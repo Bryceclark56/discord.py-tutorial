@@ -1,8 +1,14 @@
 # Discord Bot Tutorial with Python
 
-We assume that you are using Windows 10, and the example IDE/Editor will be [Visual Studio Code](https://code.visualstudio.com/).
+![Example bot executing a command given by a user](img/discord_bot_example.png)
 
-The following programs are required for this tutorial:
+A Discord bot can make your Discord server come alive. With a custom bot made by you, you can add some entertainment or assist in your moderation duties!
+
+It's also a great way to practice your newly found Python skills!
+
+For this tutorial, we assume that you are using Windows 10, and the example IDE/Editor will be [Visual Studio Code](https://code.visualstudio.com/).
+
+The following programs are required for this tutorial (You may install them as required, or install them ahead of time):
 
 Program | Download Page
 --------|--------------
@@ -48,11 +54,11 @@ Create a GitHub repo & clone locally.
 
     1. In *File Explorer*, navigate to where you want to store your code. (Desktop, My Documents, etc.)
 
-    2. Open *Command Prompt* in the current folder by pressing `Shift + Right Click` and selecting "Open command window here".
+    2. Open *Powershell* in the current folder by pressing `Shift + Right Click` and selecting "Open Powershell window here".
 
-    3. In Command Prompt, enter:
+    3. In Powershell, enter:
 
-        ``` CMD
+        ``` PowerShell
         git clone https://github.com/YourGitHubUsername/RepositoryName
         ```
 
@@ -167,34 +173,82 @@ bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
 
     1. Create a new application
 
+        1. Click the "New Application" button in the top right of the webpage.
+
+            ![Click this to create a new application](img/discord_new_app_button.png)
+
+        2. Fill in the name of your bot and leave the team as "Personal".
+
+            ![Fill in the](img/discord_new_app_form.png)
+
+        3. Click "Create".
+
     2. Enable the bot user
 
-    3. Copy the token
+        1. On the left side of the page, click the menu item that says "Bot".
+
+        2. Click the blue button on the right which says "Add Bot". (Also click "Yes, do it!" in the confirmation box)
+
+    3. Copy the token on the bot page by clicking the blue "Copy" button.
+
+        * Keep this in a safe place for now! You *will* need it later!
 
 2. Invite the bot to your server
 
-    1. Configure permissions
+    1. Navigate to the "OAuth2" page from the menu on the left.
 
-    2. Copy the invite link
+    2. Add a redirect URL.
+        * It doesn't matter the URL you enter as long as it's valid.
 
-    3. Paste in browser
+        ![Enter any valid URL](img/discord_add_redirect.png)
 
-    4. Allow the bot to join
+    3. Set the redirect URL you just added in the dropdown under "Select Redirect URL".
+
+    4. In the box below that, set the bot scope by clicking the appropriate checkbox.
+
+        ![Set the bot scope for your bot](img/discord_bot_set_scope.png)
+
+    5. Set the bot's default permissions in the next box.
+
+        * You don't need many permissions for this tutorial.
+
+        ![Give the bot basic permissions](img/discord_bot_permissions.png)
+
+    6. Copy the invite link at the bottom of the "scope" box by clicking the blue "Copy" button on the right.
+
+        ![Copy the bot invite URL](img/discord_copy_invite_url.png)
+
+    7. Paste the URL you just copied in a new browser tab's address bar and hit enter.
+
+    8. Allow the bot to join your Discord server
+
+        1. Select the server you want to join from the dropdown.
+
+        2. Click on "Continue".
+
+        3. Click on "Authorize".
+
+        4. If asked, click the verification checkbox.
 
 3. Start the bot
 
-    Now run the python program, allowing the bot to connect to Discord.
+    1. Open a terminal in Visual Studio Code using the keyboard shortcut `CTRL + SHIFT + \``
+        * It should appear at the bottom of the screen. You can click on it to begin typing in it.
 
-    * Don't forget to paste your bot token on the first line (where it says *YOUR_TOKEN*)
+    2. Run the python program, allowing the bot to connect to Discord.
 
-    ``` CMD
-    set DISCORD_BOT_TOKEN=YOUR_TOKEN
-    python bot.py
-    ```
+        * Don't forget to paste your bot token on the first line (where it says *YOUR_TOKEN*)
+
+        ``` CMD
+        set DISCORD_BOT_TOKEN=YOUR_TOKEN
+        python bot.py
+        ```
 
     You should see it say something similar to `Connected to Discord as BotName#0123` in your terminal. It may take a moment to appear.
 
     This means your bot has successfully connected to Discord and can interact with your server and its users!
+
+    You can press `CTRL + C` to force the bot to shutdown.
 
 ## Adding Commands
 
@@ -247,11 +301,127 @@ We're going to introduce user input into your bot's commands.
 
 This command will take in a user in your server and respond with a random compliment from a list.
 
+1. Create a list of compliments for the bot to select from
+
+    * This should be below the ping command, but above `bot.run()`
+
+    ``` Python
+    compliments = [
+        '{} has a great sense of humor!',
+        '{} is awesome!',
+        '{} is even more beautiful on the inside than on the outside.',
+        '{} is an inspiration to us all.',
+        '{} is like a ray of sunshine on a dreary day.',
+        '{} is okay.'
+    ]
+    ```
+
+2. Create the compliment command
+
+    ``` Python
+    @bot.command()
+    async def compliment(ctx, user: discord.Member):
+        """Compliments the specified user :)"""
+
+        # Grabs a random item from the list defined earlier, 
+        #   and puts in the name of the user specified in the curly brackets.
+        compliment = random.choice(compliments).format(user.display_name)
+        await ctx.send(compliment)
+    ```
+
+3. Add a function to handle any errors
+
+    We need some way for the bot to inform the user that they mistyped the command inputs.
+
+    ``` Python
+    @compliment.error
+    async def compliment_error(ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            # This case handles when there was no user specified.
+            await ctx.reply('You need to tell me who to compliment!')
+        elif isinstance(error, commands.BadArgument):
+            # This case handles the specified user not existing in the current server.
+            await ctx.reply('That\'s not a user in this server!')
+    ```
+
+You should have ended up typing this:
+
+``` Python
+compliments = [
+    '{} has a great sense of humor!',
+    '{} is awesome!',
+    '{} is even more beautiful on the inside than on the outside.',
+    '{} is an inspiration to us all.',
+    '{} is like a ray of sunshine on a dreary day.',
+    '{} is okay.'
+]
+
+@bot.command()
+async def compliment(ctx, user: discord.Member):
+    """Compliments the specified user :)"""
+
+    compliment = random.choice(compliments).format(user.display_name)
+    await ctx.send(compliment)
+
+@compliment.error
+async def compliment_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.reply('You need to tell me who to compliment!')
+    elif isinstance(error, commands.BadArgument):
+        await ctx.reply('That\'s not a user in this server!')
+```
+
+Feel free to test the command yourself before moving on!
+
 ### User Info
+
+![Example of using an embed](img/discord_embed_example.png)
 
 Now you're going to use an embed in your response!
 
 These allow a more advanced formatting for your messages than a normal string provides.
+
+This is a lot of lines, so I will show the entire code, which you should type in, then I will break down the parks.
+
+``` Python
+@bot.command()
+async def info(ctx, user: discord.Member):
+    """Displays information about the specified user in an embed"""
+
+    embed = discord.Embed(
+        title=f'{user.name}#{user.discriminator}',
+        description=f'''{f'**Nickname**: {user.nick}' if user.nick == None else ''}
+        **ID**: {user.id}''',
+        color=0x9800BE
+    )
+
+    embed.set_thumbnail(url=user.avatar_url)
+
+    jt = user.joined_at
+    embed.add_field(name='Joined:', value='{}\n{}'.format(jt.strftime('%m/%d/%Y'), jt.strftime('%H:%M:%S')))
+
+    ct = discord.utils.snowflake_time(user.id)
+    embed.add_field(name='Created:', value='{}\n{}'.format(ct.strftime('%m/%d/%Y'), ct.strftime('%H:%M:%S')))
+
+    # Removes the first role in the list, which is @everyone,
+    #   and gets their mention strings.
+    role_pings = [role.mention for role in user.roles[1:]]
+
+    embed.add_field(name=f'Roles ({len(user.roles)-1}):', value=f'{" ".join(role_pings)}', inline=False)
+
+    await ctx.send(embed=embed)
+```
+
+* This part creates the base Embed model and fills in the user
+
+``` Python
+embed = discord.Embed(
+        title=f'{user.name}#{user.discriminator}',
+        description=f'''{f'**Nickname**: {user.nick}' if user.nick == None else ''}
+        **ID**: {user.id}''',
+        color=0x9800BE
+    )
+```
 
 ------------------------------------
 
