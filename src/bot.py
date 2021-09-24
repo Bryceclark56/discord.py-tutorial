@@ -8,7 +8,6 @@ class MyBot(commands.Bot):
     async def on_ready(self):
         print(f'Connected to Discord as {self.user}')
 
-
 bot = MyBot(command_prefix='!')
 
 @bot.command()
@@ -59,13 +58,13 @@ async def info(ctx, user: discord.Member):
     embed.add_field(name='Joined:', value='{}\n{}'.format(jt.strftime('%m/%d/%Y'), jt.strftime('%H:%M:%S')))
 
     ct = discord.utils.snowflake_time(user.id)
-    embed.add_field(name='Created:', value='{}\n{}'.format(jt.strftime('%m/%d/%Y'), ct.strftime('%H:%M:%S')))
+    embed.add_field(name='Created:', value='{}\n{}'.format(ct.strftime('%m/%d/%Y'), ct.strftime('%H:%M:%S')))
 
-    # Removes the first role in the list, which is @everyone, 
+    # Removes the first role in the list, which is @everyone,
     #   and gets their mention strings.
     role_pings = [role.mention for role in user.roles[1:]]
 
-    embed.add_field(name=f'Roles ({len(user.roles)}):', value=f'{" ".join(role_pings)}', inline=False)
+    embed.add_field(name=f'Roles ({len(user.roles)-1}):', value=f'{" ".join(role_pings)}', inline=False)
 
     await ctx.send(embed=embed)
 
