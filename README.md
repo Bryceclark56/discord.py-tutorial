@@ -106,7 +106,11 @@ You can access the extensions section from the button on the left side of Visual
 
 2. Create the virtual environment
 
+    * Enter the command: `python -m venv env`
+
 3. Install the required libraries
+
+    * Enter the command: `pip install discord.py`
 
 ## Creating the Bot
 
