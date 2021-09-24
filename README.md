@@ -8,6 +8,8 @@ It's also a great way to practice your newly found Python skills!
 
 For this tutorial, we assume that you are using Windows 10, and the example IDE/Editor will be [Visual Studio Code](https://code.visualstudio.com/).
 
+You should also be familiar with Discord and the basics of operating a Discord server.
+
 The following programs are required for this tutorial (You may install them as required, or install them ahead of time):
 
 Program | Download Page
@@ -416,7 +418,9 @@ async def info(ctx, user: discord.Member):
     await ctx.send(embed=embed)
 ```
 
-* This part creates the base Embed model and fills in the user
+* This part creates the base Embed model and fills in the user's basic information
+
+  * It also defines the color in hexadecimal on the left side of the embed (Purple, in this case)
 
 ``` Python
 embed = discord.Embed(
@@ -426,6 +430,45 @@ embed = discord.Embed(
         color=0x9800BE
     )
 ```
+
+* Here, we set the thumnail to the specified user's avatar
+
+``` Python
+embed.set_thumbnail(url=user.avatar_url)
+```
+
+* This retrieves and displays when the user joined your server, and when their account was first created
+
+``` Python
+jt = user.joined_at
+embed.add_field(name='Joined:', value='{}\n{}'.format(jt.strftime('%m/%d/%Y'), jt.strftime('%H:%M:%S')))
+
+ct = discord.utils.snowflake_time(user.id)
+embed.add_field(name='Created:', value='{}\n{}'.format(ct.strftime('%m/%d/%Y'), ct.strftime('%H:%M:%S')))
+```
+
+* This line turns the list of the user's roles into a list of strings which are their cooresponding role mentions
+  * The first role in the list is always removed since it will always be "@everyone"
+
+``` Python
+role_pings = [role.mention for role in user.roles[1:]]
+```
+
+* Here, we set the title of the field to include the number of roles the user has, then display them in a list
+
+``` Python
+embed.add_field(name=f'Roles ({len(user.roles)-1}):', value=f'{" ".join(role_pings)}', inline=False)
+```
+
+* Finally, the embed is sent as a message into the Discord channel in which the command originated.
+
+``` Python
+await ctx.send(embed=embed)
+```
+
+Now you have the basics of making a Discord bot! Congratulations!!
+
+I encourage you to check out the additional resources below and learn more, because there are many many more things you can do beyond this tutorial!
 
 ------------------------------------
 
