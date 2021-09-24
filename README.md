@@ -96,11 +96,11 @@ You can access the extensions section from the button on the left side of Visual
 
 ### Virtual Environment
 
-1. Test
+1. Open a terminal in Visual Studio Code
 
-2. Test
+2. Create the virtual environment
 
-3. Test
+3. Install the required libraries
 
 ## Creating the Bot
 
