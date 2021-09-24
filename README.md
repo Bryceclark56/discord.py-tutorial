@@ -10,9 +10,18 @@ Python 3.9 | <https://www.python.org/downloads/>
 Git | <https://git-scm.com/downloads>
 Visual Studio Code | <https://code.visualstudio.com/download>
 
+## Python setup
+
+Install the latest python version (Python 3.9 at time of writing).
+
+1. [Install Python](https://www.python.org/downloads/)
+    * When you see the option during installation, click the `Add to PATH` checkbox!
+
+2. Restart your computer for some changes to take effect.
+
 ## Git Setup
 
-Create GitHub repo & clone locally.
+Create a GitHub repo & clone locally.
 
 1. If not already done, create a [GitHub](https://github.com/) account.
 
@@ -36,45 +45,62 @@ Create GitHub repo & clone locally.
 3. [Install Git](https://git-scm.com/downloads) on your computer.
 
 4. Clone the git repository to your computer
-    1. In *File Explorer*, navigate to where you want to store your code. (Desktop, My Documents, etc.)
-    2. Open *PowerShell* in the current folder by pressing `Shift + Right Click` and selecting "Open command window here".
-    3. In PowerShell, enter:
 
-        ``` PowerShell
+    1. In *File Explorer*, navigate to where you want to store your code. (Desktop, My Documents, etc.)
+
+    2. Open *Command Prompt* in the current folder by pressing `Shift + Right Click` and selecting "Open command window here".
+
+    3. In Command Prompt, enter:
+
+        ``` CMD
         git clone https://github.com/YourGitHubUsername/RepositoryName
         ```
 
-        * Replace *YourUsername* and *RepositoryName* with the appropriate values
-
-## Python setup
-
-Install the latest python version (Python 3.9 at time of writing)
-
-1. [Install Python](https://www.python.org/downloads/)
-
-2. Create a virtual environment
-    * Create in the git repo folder
-
-3. Install required packages inside the virtual environment
-    * discord<area>.py
+        * Replace *YourUsername* and *RepositoryName* with the appropriate values.
 
 ## IDE Setup
 
-(IMAGES OF WHERE TO INSTALL EXTENSIONS)
+You can access the extensions section from the button on the left side of Visual Studio Code.
+
+![Open the extensions tab](img/vscode_extensions_tab.png)
 
 ### Python Extension
 
+1. Type `python` into the search bar.
+
+    ![Search for python](img/vscode_extension_search_python.png)
+
+2. Click the extension published by *Microsoft*. It should be the first in the list of results.
+
+3. Click the blue install button.
+
 ### GitLens
+
+1. Type `gitlens` into the search bar.
+
+    ![Search for gitlens](img/vscode_extension_search_gitlens.png)
+
+2. Click the extension `GitLens -- Git supercharged` by Eric Amodio. It should be the first in the list of results.
+
+3. Click the blue install button.
 
 ### Opening the Project
 
 1. Click on "Open Folder" in the *Welcome* tab of Visual Studio Code. (The tabs are located at the top of the window)
+
+    * If you lost this tab, you can also use the *File* context menu in the top-left to perform this action.
 
 2. Navigate to where the cloned Git repository is located.
 
 3. Click on the folder and hit okay.
 
 ### Virtual Environment
+
+1. Test
+
+2. Test
+
+3. Test
 
 ## Creating the Bot
 
@@ -83,7 +109,8 @@ Install the latest python version (Python 3.9 at time of writing)
 **Indentation in the code is important!**
 
 In Visual Studio Code, create a new file and name it `bot.py`.
-(INCLUDE IMAGE TO LOCATE NEW FILE BUTTON)
+
+![Click here to create a new file](img/vscode_new_file_button.png)
 
 ### Creating the Bot Class
 
@@ -139,25 +166,35 @@ bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
     In-order to allow your bot to connect to Discord, you must create the bot user on the [Discord Developer Portal](https://discord.com/developers/).
 
     1. Create a new application
-    2. Enable bot
-    3. Copy token
+
+    2. Enable the bot user
+
+    3. Copy the token
 
 2. Invite the bot to your server
 
     1. Configure permissions
+
     2. Copy the invite link
+
     3. Paste in browser
+
     4. Allow the bot to join
 
 3. Start the bot
 
     Now run the python program, allowing the bot to connect to Discord.
 
-    ``` Powershell
+    * Don't forget to paste your bot token on the first line (where it says *YOUR_TOKEN*)
+
+    ``` CMD
+    set DISCORD_BOT_TOKEN=YOUR_TOKEN
     python bot.py
     ```
 
-    You should see it say something similar to `Connected to Discord as BotName#0123` in your terminal.
+    You should see it say something similar to `Connected to Discord as BotName#0123` in your terminal. It may take a moment to appear.
+
+    This means your bot has successfully connected to Discord and can interact with your server and its users!
 
 ## Adding Commands
 
@@ -181,7 +218,7 @@ async def ping(ctx): # The command name is defined by the function name
 
 You can test the command by sending `!ping` into any channel in the Discord server with your bot.
 
-And, if you feel lost, here is what you should have so far:
+And, __if you feel lost__, here is what you should have so far:
 
 ``` Python
 import discord
@@ -214,9 +251,13 @@ This command will take in a user in your server and respond with a random compli
 
 Now you're going to use an embed in your response!
 
+These allow a more advanced formatting for your messages than a normal string provides.
+
 ------------------------------------
 
 ## Additional Resources
+
+Feel free to browse these resources to learn more on the topics presented in this tutorial!
 
 * [Python Documentation](https://www.python.org/doc/)
   * [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
