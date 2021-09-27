@@ -112,7 +112,9 @@ You can access the extensions section from the button on the left side of Visual
 
 3. Install the required libraries
 
-    * Enter the command: `pip install discord.py`
+    1. Enter the virtual environment using the command: `.\env\bin\Activate.ps1`
+
+    2. Enter the command: `pip install discord.py` to install the discord<span>.py module.
 
 ## Creating the Bot
 
@@ -265,6 +267,8 @@ As you add each command, re-start your bot and test it out!
 **Important**: Ensure that the code is typed before `bot.run()` and *after* `bot = MyBot()`
 
 ### Ping
+
+![Test that your bot is working by pinging it!](img/discord_bot_ping_example.png)
 
 A ping command is an easy way for users and yourself to ensure that your bot can read and reply to users' messages.
 
