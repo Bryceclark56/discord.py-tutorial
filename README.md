@@ -490,5 +490,12 @@ Feel free to browse these resources to learn more on the topics presented in thi
 
 * [Python Documentation](https://www.python.org/doc/)
   * [Python Tutorial](https://docs.python.org/3/tutorial/index.html)
+  * [Virtual Environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment)
 * [Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/)
+  * [Commands](https://discordpy.readthedocs.io/en/stable/ext/commands/commands.html?highlight=command)
+  * [Embeds](https://discordpy.readthedocs.io/en/stable/api.html?highlight=embed#discord.Embed)
 * [Discord API Documentation](https://discord.com/developers/docs/intro)
+* [Git Website](https://git-scm.com/)
+  * [Pro Git by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2) (Great resource to learn git *and* free!)
+  * [Git Reference Manual](https://git-scm.com/docs)
+* [Github Documentation](https://docs.github.com/en)
