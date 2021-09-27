@@ -98,7 +98,7 @@ You can access the extensions section from the button on the left side of Visual
 
     * If you lost this tab, you can also use the *File* context menu in the top-left to perform this action.
 
-2. Navigate to where the cloned Git repository is located.
+2. Navigate to where the cloned Git repository's folder is located.
 
 3. Click on the folder and hit okay.
 
