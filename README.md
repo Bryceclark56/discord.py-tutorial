@@ -242,14 +242,14 @@ bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
 
     1. Open a terminal in Visual Studio Code using the keyboard shortcut `CTRL + SHIFT + \``
         * It should appear at the bottom of the screen. You can click on it to begin typing in it.
-    
-    3. Enter the virtual environment:
+
+    2. Enter the virtual environment:
 
         ``` Powershell
         ./env/bin/Activate.ps1
         ```
 
-    2. Run the python program, allowing the bot to connect to Discord.
+    3. Run the python program, allowing the bot to connect to Discord.
 
         * Don't forget to paste your bot token on the first line (where it says *YOUR_TOKEN*)
 
